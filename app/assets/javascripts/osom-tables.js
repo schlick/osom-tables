@@ -152,7 +152,7 @@
   function table_load_success(container, new_content, url) {
     const parser = new DOMParser();
     const new_content_doc = parser.parseFromString(new_content, "text/html");
-    container.html('<div class="osom-table ">' +  new_content_doc.getElementsByClassName('osom-table')[0].innerHTML + '</div>');
+    container.html(new_content_doc.getElementsByClassName('osom-table')[0].innerHTML);
     var actual_table = container.find('table');
     if (actual_table.find('tbody').children().length > 0) {
       container.removeClass('empty');
