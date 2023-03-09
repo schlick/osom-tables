@@ -150,14 +150,14 @@
 
   // Callback for successful ajax load of table data
   function table_load_success(container, new_content, url) {
-    var new_container = $(new_content);
-    container.html($(new_content).children());
-
-    var actual_table = new_container.find('table');
-    actual_table.data('url', url);
-
-    if (new_container.find('tbody').children().length > 0) {
+    const parser = new DOMParser();
+    const new_content_doc = parser.parseFromString(new_content, "text/html");
+    container.html(new_content_doc.getElementsByClassName('osom-table')[0].innerHTML);
+    var actual_table = container.find('table');
+    if (actual_table.find('tbody').children().length > 0) {
       container.removeClass('empty');
+    } else {
+      container.addClass('empty');
     }
   }
 
